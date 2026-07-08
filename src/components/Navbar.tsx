@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, MessageCircle, Dna } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { CONTACT } from "../data/socials";
 import { cn } from "../utils/cn";
 
@@ -20,14 +20,22 @@ export default function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
+
     window.addEventListener("scroll", onScroll);
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const handleNavClick = (href: string) => {
     setOpen(false);
+
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+
+    if (el) {
+      el.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
@@ -39,32 +47,35 @@ export default function Navbar() {
           : "bg-transparent"
       )}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+
+        {/* Logo */}
         <a
           href="#home"
           onClick={(e) => {
             e.preventDefault();
             handleNavClick("#home");
           }}
-          className="flex items-center gap-3 group"
+          className="flex items-center group"
         >
           <img
             src="/favicon.svg"
             alt="BioVerse Logo"
-            className="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-105"
+            className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
           />
-        
-          <span className="text-xl font-bold text-emerald-900">
-            BioVerse
-          </span>
         </a>
 
+
+        {/* Desktop Navigation */}
         <ul className="hidden lg:flex items-center gap-1">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(link.href);
+                }}
                 className="px-3.5 py-2 text-sm font-medium text-emerald-900/80 hover:text-emerald-900 rounded-full hover:bg-emerald-800/5 transition-colors"
               >
                 {link.label}
@@ -73,9 +84,13 @@ export default function Navbar() {
           ))}
         </ul>
 
+
+        {/* Desktop WhatsApp Button */}
         <div className="hidden lg:flex items-center gap-3">
           <a
-            href={CONTACT.whatsappLinkWithMessage("Hi BioVerse! I'd like to know more about your Biology classes.")}
+            href={CONTACT.whatsappLinkWithMessage(
+              "Hi BioVerse! I'd like to know more about your Biology classes."
+            )}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full bg-emerald-800 px-5 py-2.5 text-sm font-semibold text-lime-300 shadow-md shadow-emerald-900/20 hover:bg-emerald-700 hover:-translate-y-0.5 transition-all duration-300"
@@ -85,30 +100,54 @@ export default function Navbar() {
           </a>
         </div>
 
+
+        {/* Mobile Menu Button */}
         <button
           className="lg:hidden rounded-lg p-2 text-emerald-900"
           onClick={() => setOpen((o) => !o)}
           aria-label="Toggle navigation menu"
         >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {open ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Menu className="h-6 w-6" />
+          )}
         </button>
+
       </nav>
 
+
+      {/* Mobile Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{
+              height: 0,
+              opacity: 0,
+            }}
+            animate={{
+              height: "auto",
+              opacity: 1,
+            }}
+            exit={{
+              height: 0,
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.3,
+            }}
             className="lg:hidden overflow-hidden bg-cream-50/98 backdrop-blur-lg border-t border-emerald-900/10"
           >
+
             <ul className="flex flex-col px-4 py-3">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(link.href);
+                    }}
                     className="block py-3 text-base font-medium text-emerald-900/80 border-b border-emerald-900/5 last:border-none"
                   >
                     {link.label}
@@ -116,9 +155,13 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
+
+
             <div className="px-4 pb-4">
               <a
-                href={CONTACT.whatsappLinkWithMessage("Hi BioVerse! I'd like to know more about your Biology classes.")}
+                href={CONTACT.whatsappLinkWithMessage(
+                  "Hi BioVerse! I'd like to know more about your Biology classes."
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 rounded-full bg-emerald-800 px-5 py-3 text-sm font-semibold text-lime-300 w-full"
@@ -127,9 +170,11 @@ export default function Navbar() {
                 Chat on WhatsApp
               </a>
             </div>
+
           </motion.div>
         )}
       </AnimatePresence>
+
     </header>
   );
 }
