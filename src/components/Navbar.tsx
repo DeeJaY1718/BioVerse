@@ -40,12 +40,22 @@ export default function Navbar() {
       )}
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
-        <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick("#home"); }} className="flex items-center gap-2 group">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-800 text-lime-300 shadow-md shadow-emerald-900/20 group-hover:rotate-12 transition-transform duration-300">
-            <Dna className="h-5 w-5" />
-          </span>
-          <span className="text-xl font-bold tracking-tight text-emerald-900">
-            Bio<span className="text-lime-600">Verse</span>
+        <a
+          href="#home"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick("#home");
+          }}
+          className="flex items-center gap-3 group"
+        >
+          <img
+            src="/favicon.svg"
+            alt="BioVerse Logo"
+            className="h-10 w-10 object-contain transition-transform duration-300 group-hover:scale-105"
+          />
+        
+          <span className="text-xl font-bold text-emerald-900">
+            BioVerse
           </span>
         </a>
 
