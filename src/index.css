@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  /* Background Cream (#F3F4F6) scale used across BioVerse surfaces */
+  --color-cream-50: #f9faf9;
+  --color-cream-100: #f3f4f6;
+  --color-cream-200: #e9ebe7;
+
+  --font-sans: "Poppins", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream-50);
+}
+
+/* Custom scrollbar for a premium feel */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+::-webkit-scrollbar-thumb {
+  background: #065f46;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #047a56;
+}
+
+/* Selection color */
+::selection {
+  background-color: #a3e635;
+  color: #022c22;
+}
+
+/* Utility class for gradient text used sparingly for emphasis */
+.text-gradient-lime {
+  background: linear-gradient(90deg, #065f46, #16a34a, #a3e635);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
